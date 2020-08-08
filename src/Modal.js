@@ -19,7 +19,11 @@ export default class Modal {
     document
       .querySelector(".modal__btn--close")
       .addEventListener("click", () => this.close());
-    this.$modalContainer.addEventListener("click", () => this.close());
+    this.$modalContainer.addEventListener("click", event => {
+      if (event.target.classList.contains("modal__content")) {
+        this.close();
+      }
+    });
     window.addEventListener("keydown", event => {
       if (event.key !== "Escape") return;
       const $modal = document.querySelector("[class*=modal--open]");
